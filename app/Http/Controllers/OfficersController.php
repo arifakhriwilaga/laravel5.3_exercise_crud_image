@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\OfficerRequest;
 use App\Http\Requests;
 use App\Officer;
-use Session;
+use App\Comment;   
+use Session,Image,File,Validator;
 
 class OfficersController extends Controller
 {
@@ -40,20 +41,30 @@ class OfficersController extends Controller
     public function store(OfficerRequest $request)
     {
 
-        $officers = Officer::create([
-            'name' => $request->input_name,
-            'address' => $request->input_address
-            ]);
+        // $officers = Officer::create([
+        //     'name' => $request->input_name,
+        //     'address' => $request->input_address
+        //     ]);
 
         // alternative code save 
-        // $add = new Officer();
-        // $add->name = $request->input_name;
-        // $add->address = $request->input_address;
-        // $add->save();
+        $file = $request->file('image');
+        $image = Image::make($file);
+        $image_location = public_path().'/image_upload/';
 
+        $image->save($image_location.$file->getClientOriginalName());
+        $image->resize(200,100);
+        $image->save($image_location.'thumb'.$file->getClientOriginalName());
 
-            Session::flash('message','Officer '.$request->input_name.' success to add');
-            return redirect('officer-index');
+        $add = new Officer();
+        $add->name = $request->input_name;
+        $add->title_image = $request->input_title_image;
+        $add->description_image = $request->input_description_image;
+        $add->image = $file->getClientOriginalName();
+        
+        $add->save();
+
+        Session::flash('message',$request->input_name.' your photo success to post');
+        return redirect('officer-index');
         }
 
     /**
@@ -64,8 +75,11 @@ class OfficersController extends Controller
      */
     public function show($id)
     {
-       $officers = Officer::find($id);
-       return view('officer.officer_show')->with('list_officer',$officers);
+        $officers = Officer::find($id);
+        $comments = Comment::all();
+        return view('officer.officer_show')
+        ->with('list_officer',$officers)
+        ->with('list_comment',$comments);
     }
 
     /**
@@ -87,14 +101,27 @@ class OfficersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(OfficerRequest $request, $id)
+    {   
+
         $officers = Officer::find($id);
-        $officers->name = $request->name;
-        $officers->address = $request->address;
-        $officers->save();
+        $file = $request->file('image');
+        $image_location = public_path().'/image_upload/';
+        $deletefile = File::delete('image_upload/'.$request->image);
+
+        if ($request->file('image')->isValid()) {
+           $request->file('image')->move($image_location, $file->getClientOriginalName());
+        
+        }else{
+           echo "<script>alert('Failed');</script>";
+           die();
+           return back();
+
+     }
+
+        $officers->update($request->all());
         // $officers->update($request->all());
-        Session::flash('message','Officer '.$request->name.' success to update');
+        Session::flash('message',$request->name.' your photo success to update');
         return redirect('officer-index');
     }
 

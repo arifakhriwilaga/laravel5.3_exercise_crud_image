@@ -22,8 +22,7 @@ class OfficerRequest extends Request
     public function rules()
     {
         return [
-            'input_name' => 'required|max:50|min:2|type:string',
-            'input_address' => 'required|max:50|min:2|string'
+            'input_name' => 'required|max:50|min:2|string'
         ];
     }
 

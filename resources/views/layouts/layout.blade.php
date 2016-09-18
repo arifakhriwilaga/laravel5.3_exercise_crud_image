@@ -8,8 +8,11 @@
         <title>Laravel</title>
         <!--Link Material Design Icon -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="/assets/libraries/materializecss/css/materialize.css"  media="screen,projection"/>
+
+      <link type="text/css" rel="stylesheet" href="/assets/css/bootstrap.css">
+        <!-- Bootstrap Material Design -->
+      <link type="text/css" rel="stylesheet" href="/assets/libraries/bootstrap_material/css/bootstrap-material-design.css">
+      <link type="text/css" rel="stylesheet" href="/assets/libraries/bootstrap_material/css/ripples.css">
        <!-- Styles -->
         <style>
             
@@ -17,15 +20,20 @@
     </head>
     <body>
     <script type="text/javascript" src="/assets/libraries/jquery/jquery-3.1.0.js"></script>
-    <script type="text/javascript" src="/assets/js/app.js"></script>
-    <script type="text/javascript" src="/assets/libraries/materializecss/js/materialize.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/libraries/bootstrap_material/js/material.js"></script>
+    <script type="text/javascript" src="/assets/libraries/bootstrap_material/js/ripples.js"></script>
     <script>
       $( document ).ready(function(){
-       $(".button-collapse").sideNav();
+         $.material.init();
      });
     </script>
     <!-- Navbar -->
+    <div class="navbar navbar-info">
+    <div class="container-fluid">
      @include('shared.header')
+     </div>
+     </div>
 
      <!-- Content -->
      <div class="row">

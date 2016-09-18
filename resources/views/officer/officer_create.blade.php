@@ -4,26 +4,41 @@
   <br>
   <p>
 
-<div class="col s4">
+<div class="col-xs-4">
 </div>
-<div class="col s4">
-{!! Form::open(['route' => 'officer_store']) !!}
+<!-- Form Open -->
+
+<div class="col-xs-6">
+<div class="well">
+{!! Form::open(['route' => 'officer_store', 'enctype' => 'multipart/form-data']) !!}
 <!-- Input name -->
-{!! Form::label('name', 'Name') !!}
-{!! Form::text('input_name') !!}
-{!! $errors->first('input_name') !!}
+    <div class="form-group">  
+        <input class="form-control" placeholder="Your Name" type="text" name="input_name">
+    </div>
 
-<br>
-<br>
-<br>
-<!-- Input address -->
-{!! Form::label('address', 'Address') !!}
-{!! Form::text('input_address') !!}
-{!! $errors->first('input_address') !!}  
+{!! $errors->first('input_name',null) !!}
 
-{!! Form::submit('Add Officer!') !!}
+<!-- Input title image -->
+    <div class="form-group">
+        <input class="form-control" placeholder="Title Image" type="text" name="input_title_image">
+    </div>
+{!! $errors->first('input_title_image') !!} 
+
+<!-- Input description image -->
+    <div class="form-group">
+        <input class="form-control" placeholder="Description Image" type="text" name="input_description_image">	
+    </div>
+{!! $errors->first('input_description_image') !!}  
+
+{!! Form::file('image') !!}
+
+<br><br><br>
+{!! Form::submit('Save') !!}
 {!! Form::close() !!}
 </div>
-<div class="col s4">
+<!-- close form -->
+
+</div>
+<div class="col-xs-4">
 </div>
 @stop

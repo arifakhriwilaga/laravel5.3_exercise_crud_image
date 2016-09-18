@@ -2,9 +2,7 @@
 
 @section('content')
 <br>
-<div class="col-xs-3">
-</div>
-<div class="col-xs-6">
+<div class="col s6">
 <div class="panel panel-default">
     <div class="panel-body">
   <a class="btn-floating cyan" href="officer-create">
@@ -28,18 +26,13 @@
     	<th>ID</th>
     	<th>Name</th>
     	<th>Address</th>
-      <th>Title Image</th>
-      <th>Description Image</th>
-      <th>Image</th>
         <th colspan="2">Action</th>
     </tr>
     @foreach ($list_officer as $list)
     <tr>
     	<td>{{ $list->id }}</td>
     	<td>{{ $list->name }}</td>
-      <td>{{ $list->title_image }}</td>
-      <td>{{ $list->description_image }}</td>
-      <td><img src="{{ asset('/image_upload/'.$list->image) }}" width="200px" height="100px"></td>
+    	<td>{{ $list->address }}</td>
         <td>
             <a class="btn-floating green" href="officer-show/{{$list->id}}">
                 <i class="material-icons right">info_outline</i>
@@ -56,7 +49,9 @@
   </table>
   </div>
   </div>
-<div class="col-xs-3">
-</div>
 </div>
 @stop
+
+<!-- example link to changer a href
+    {!! link_to('officer-edit/'.$list->id, 'Edit', array('class' => 'btn-floating orange')) !!}
+-->
