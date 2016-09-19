@@ -30,7 +30,8 @@
     </div>
 {!! $errors->first('input_description_image') !!}  
 
-{!! Form::file('image') !!}
+{!! Form::file('image',null) !!}
+{!! $errors->first('image') !!} 
 
 <br><br><br>
 {!! Form::submit('Save') !!}

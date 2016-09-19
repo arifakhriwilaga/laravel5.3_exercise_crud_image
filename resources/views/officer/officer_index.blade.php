@@ -2,9 +2,9 @@
 
 @section('content')
 <br>
-<div class="col-xs-3">
+<div class="col-xs-2">
 </div>
-<div class="col-xs-6">
+<div class="col-xs-8">
 <div class="panel panel-default">
     <div class="panel-body">
   <a class="btn-floating cyan" href="officer-create">
@@ -39,7 +39,7 @@
     	<td>{{ $list->name }}</td>
       <td>{{ $list->title_image }}</td>
       <td>{{ $list->description_image }}</td>
-      <td><img src="{{ asset('/image_upload/'.$list->image) }}" width="200px" height="100px"></td>
+      <td><img src="{{ asset('/image_upload/thumb'.$list->image) }}" width="200px" height="100px"></td>
         <td>
             <a class="btn-floating green" href="officer-show/{{$list->id}}">
                 <i class="material-icons right">info_outline</i>
@@ -56,7 +56,7 @@
   </table>
   </div>
   </div>
-<div class="col-xs-3">
+<div class="col-xs-2">
 </div>
 </div>
 @stop

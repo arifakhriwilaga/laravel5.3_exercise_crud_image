@@ -22,14 +22,16 @@ class OfficerRequest extends Request
     public function rules()
     {
         return [
-            'input_name' => 'required|max:50|min:2|string'
+            'input_name' => 'required|max:50|min:2|string',
+            'input_title_image' => 'required|max:50|min:2|string',
+            'input_description_image' => 'required|max:500|min:2|string'
+
         ];
     }
 
     public function message()
     {
         return [
-
         ];
     }
 }
